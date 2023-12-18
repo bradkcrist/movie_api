@@ -4,7 +4,7 @@ morgan = require('morgan');
 
 const app = express();
 
-app.get('/myMovie_APi', (req, res) => {
+app.get('/myMovie_API', (req, res) => {
   res.send('My Top 10 Movies!');
 });
 
@@ -30,7 +30,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(methOverride());
+app.use(methodOverride());
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
