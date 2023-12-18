@@ -20,8 +20,7 @@ app.get('/', (req, res) => {
 
 app.use(express.static('public'));
 
-const bodyParser = require('body-parser'),
-  methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 app.use(
   bodyParser.urlencoded({
@@ -30,7 +29,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(methodOverride());
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
