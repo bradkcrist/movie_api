@@ -15,7 +15,7 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {
 app.use(morgan('combined', { stream: accessLogStream }));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my app!');
+  res.send('Welcome to my Top 10!');
 });
 
 app.use(express.static('public'));
