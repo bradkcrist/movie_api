@@ -5,10 +5,29 @@
   </head>
   <body>
     <h1>Favorite Movies API</h1>
-    <p>
-      This is an API about some of my favorite movues. It'll have a description
-      of some of my favorite movies. Plus the genre, actor, directors, and
-      run-time.
-    </p>
+    <ul>
+      <li>
+        Request: app.get('/myMovie_API', (req, res) => { res.send('My Top 10
+        Movies!'); });
+      </li>
+      <li>Summary: GET request for my top 10 favorite movies</li>
+      <li>Query Parameters: res.send with text about My top 10 movies.</li>
+      <li>
+        Response: Returns my top 10 favorite movies. Actors, Directors, Genres,
+        and Plot line
+      </li>
+    </ul>
+    <ul>
+      <li>
+        Request: app.get('/', (req, res) => { res.send('Welcome to my Top 10!');
+        });
+      </li>
+      <li>Summary: Get request for a genreal URL endpoint and welcome text.</li>
+      <li>
+        Query Parameters: res.send with filler text, no correlation to my first
+        endpoint.
+      </li>
+      <li>Response: Welcome text. Will be changed later on.</li>
+    </ul>
   </body>
 </html>
