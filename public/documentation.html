@@ -3,31 +3,39 @@
   <head>
     <title>Movie API</title>
   </head>
+
   <body>
     <h1>Favorite Movies API</h1>
-    <ul>
-      <li>
-        Request: app.get('/myMovie_API', (req, res) => { res.send('My Top 10
-        Movies!'); });
-      </li>
-      <li>Summary: GET request for my top 10 favorite movies</li>
-      <li>Query Parameters: res.send with text about My top 10 movies.</li>
-      <li>
-        Response: Returns my top 10 favorite movies. Actors, Directors, Genres,
-        and Plot line
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Request: app.get('/', (req, res) => { res.send('Welcome to my Top 10!');
-        });
-      </li>
-      <li>Summary: Get request for a genreal URL endpoint and welcome text.</li>
-      <li>
-        Query Parameters: res.send with filler text, no correlation to my first
-        endpoint.
-      </li>
-      <li>Response: Welcome text. Will be changed later on.</li>
-    </ul>
+    <h2>GET Request</h2>
+    <h5>Endpoint: /movies</h5>
+    <div>Description: Returns a list of all my movies in my Movie API</div>
+    <div>Response: 200 status code if the request went threw and a list of my movies</div>
+    <h5>Endpoint: /movies/:title</h5>
+    <div>Description: Returns a movie and the title of the movie</div>
+    <div>Response: 200 status code if title of movie is found in json format or a 400 error status code if no title has been found</div>
+    <h5>Endpoint: /movies/genre/:genreName</h5>
+    <div>Description: Returns a genre for a certain movie by name</div>
+    <div>Response: 200 status code if the genre of the certain movie is found in json format or a 400 error status code if no genre has been found</div>
+    <h5>Endpoint:/movies/directors/:directorName</h5>
+    <div>Description: Returns a director of a certain movie by name</div>
+    <div>Response: 200 status code if the directors name is found in json format or a 400 error status code if no director by that name has been found</div>
+    <h2>DELETE Request</h2>
+    <h5>Endpoint:/users/:id/:movieTitle</h5>
+    <div>Description: Find the certain user and all of ther favorite movies and removes a movie by title out of there favorite movies</div>
+    <div>Response: 200 status code if succesful removed movie from users list in json format or a 400 error status code if it failed to remove movie</div>
+    <h5>Endpoint: /users/:id</h5>
+    <div>Description: Returns a list of users and lets your remove a user by id number</div>
+    <div>Response: 200 status code if you sucessful removed user by id in json format or 400 error status code if removing user by id fails</div>
+    <h2>POST Request</h2>
+    <h5>Endpoint: users/:id/:movieTitle</h5>
+    <div>Description: Lets a user add a favorite movie to there list</div>
+    <div>Response: 200 status code if they sucessfully added movie by title to there list in json format or 400 error status code if they couldn't add movie by title to there list</div>
+    <h5>Endpoint:/users</h5>
+    <div>Description: Lets you add a user by id via uuid</div>
+    <div>Response: 200 status code if successfully added user and id in json format or a 400 error status code if user couldn't be added</div>
+    <h2>PUT Request</h2>
+    <h5>Endpoint: /users/:id</h5>
+    <div>Description: Lets you update users information by user/id</div>
+    <div>Response: 200 status code if sucessfully updated user in json format or 400 if it couldn't update users information</div>
   </body>
 </html>
