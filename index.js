@@ -2,10 +2,42 @@ const express = require("express");
 morgan = require("morgan");
 const uuid = require("uuid");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 (fs = require("fs")), (path = require("path"));
 
 const app = express();
 app.use(bodyParser.json());
+
+let movieSchema = mongoose.Schema({
+  Title: { type: String, required: true },
+  Description: { type: String, required: true },
+  Genre: {
+    Name: String,
+    Description: String,
+  },
+  Director: {
+    Name: String,
+    Description: String,
+    Birth: Date,
+  },
+  Actors: [String],
+  ImagePath: String,
+  Featured: Boolean,
+});
+
+let userSchema = mongoose.Schema({
+  Username: { type: String, required: true },
+  Password: { type: String, required: true },
+  Email: { type: String, required: true },
+  Birth: Date,
+  FavoriteMovies: [{ type: mongoose.Schema.Type.ObjectId, ref: "Movie" }],
+});
+
+let Movie = mongoose.model("Movie", movieSchema);
+let User = mongoose.model("User", userSchema);
+
+module.exports.Movie = Movie;
+module.exports.User = User;
 
 let users = [
   {
