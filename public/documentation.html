@@ -5,37 +5,64 @@
   </head>
 
   <body>
-    <h1>Favorite Movies API</h1>
-    <h2>GET Request</h2>
-    <h5>Endpoint: /movies</h5>
-    <div>Description: Returns a list of all my movies in my Movie API</div>
-    <div>Response: 200 status code if the request went threw and a list of my movies</div>
-    <h5>Endpoint: /movies/:title</h5>
-    <div>Description: Returns a movie and the title of the movie</div>
-    <div>Response: 200 status code if title of movie is found in json format or a 400 error status code if no title has been found</div>
-    <h5>Endpoint: /movies/genre/:genreName</h5>
-    <div>Description: Returns a genre for a certain movie by name</div>
-    <div>Response: 200 status code if the genre of the certain movie is found in json format or a 400 error status code if no genre has been found</div>
-    <h5>Endpoint:/movies/directors/:directorName</h5>
-    <div>Description: Returns a director of a certain movie by name</div>
-    <div>Response: 200 status code if the directors name is found in json format or a 400 error status code if no director by that name has been found</div>
-    <h2>DELETE Request</h2>
-    <h5>Endpoint:/users/:id/:movieTitle</h5>
-    <div>Description: Find the certain user and all of ther favorite movies and removes a movie by title out of there favorite movies</div>
-    <div>Response: 200 status code if succesful removed movie from users list in json format or a 400 error status code if it failed to remove movie</div>
-    <h5>Endpoint: /users/:id</h5>
-    <div>Description: Returns a list of users and lets your remove a user by id number</div>
-    <div>Response: 200 status code if you sucessful removed user by id in json format or 400 error status code if removing user by id fails</div>
-    <h2>POST Request</h2>
-    <h5>Endpoint: users/:id/:movieTitle</h5>
-    <div>Description: Lets a user add a favorite movie to there list</div>
-    <div>Response: 200 status code if they sucessfully added movie by title to there list in json format or 400 error status code if they couldn't add movie by title to there list</div>
-    <h5>Endpoint:/users</h5>
-    <div>Description: Lets you add a user by id via uuid</div>
-    <div>Response: 200 status code if successfully added user and id in json format or a 400 error status code if user couldn't be added</div>
-    <h2>PUT Request</h2>
-    <h5>Endpoint: /users/:id</h5>
-    <div>Description: Lets you update users information by user/id</div>
-    <div>Response: 200 status code if sucessfully updated user in json format or 400 if it couldn't update users information</div>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/'</h6>
+    <div>Description: This is the main end point for MyMovies</div>
+    <div>Response:Welcome to MyMovie</div>
+    <span></span>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/movies'</h6>
+    <div>Description: Returns a list of all movies in JSON format</div>
+    <div>Response: 201 status code with all movies in JSON</div>
+    <span></span>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/movies/:Title'</h6>
+    <div>Description: Returns a movie by title</div>
+    <div>Response: Movie with title and description in JSON</div>
+    <span></span>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/movies/genre/:Name'</h6>
+    <div>Description: Returns a genre of a certain movie</div>
+    <div>Response: Genre with the description of genre in JSON format</div>
+    <span></span>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/movies/director/:Name'</h6>
+    <div>Description: Returns a director by name and there information</div>
+    <div>Response: Director, Name, Bio, Birth all in JSON format</div>
+    <span></span>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/users'</h6>
+    <div>Description: Returns all users in database</div>
+    <div>Response: A list of all users in JSON format</div>
+    <span></span>
+    <h2>Get Requests</h2>
+    <h6>Endpoint: '/users/:Username'</h6>
+    <div>Description: Finds user by username</div>
+    <div>Response: Found User by username, with all there information</div>
+    <span></span>
+    <h2>Post Requests</h2>
+    <h6>Endpoint: '/users'</h6>
+    <div>Description: Create a Users with Username, Password, Email, and Birthdate</div>
+    <div>Response: Created user with all there information in JSON format</div>
+    <span></span>
+    <h2>Post Requests</h2>
+    <h6>Endpoint: '/users/:Username/movies/:MovieID'</h6>
+    <div>Description: Adds favorite movie to users list of favorite movies</div>
+    <div>Response: Updated User information with there Favorite movie in JSON format</div>
+    <span></span>
+    <h2>Put Requests</h2>
+    <h6>Endpoint: '/users/:Username'</h6>
+    <div>Description: Updates information about user via username</div>
+    <div>Response: Updated information for certain user in JSON format</div>
+    <span></span>
+    <h2>Delete Requests</h2>
+    <h6>Endpoint: '/users/:Username/movies/:MovieID'</h6>
+    <div>Description: Deletes Favorite movie from users list of favorite movies via username/MovieID</div>
+    <div>Response: Updated Information of users and there Favorite movie in JSON format</div>
+    <span></span>
+    <h2>Delete Requests</h2>
+    <h6>Endpoint: '/users/:Username'</h6>
+    <div>Description: Deletes users completly via username</div>
+    <div>Response: Deleted User sucessful IN JSON format</div>
   </body>
 </html>
