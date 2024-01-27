@@ -15,12 +15,12 @@ const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/mymovie', { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.get('/', async (req, res) => {
+app.get('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
   res.send('Welcome to myMovies');
 });
 
 // Get all movies
-app.get('/movies', async (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -32,7 +32,7 @@ app.get('/movies', async (req, res) => {
 });
 
 // Get Movie by the title
-app.get('/movies/:Title', async (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
       res.json(movie);
@@ -44,7 +44,7 @@ app.get('/movies/:Title', async (req, res) => {
 });
 
 //Get Genre by name
-app.get('/movies/genre/:Name', async (req, res) => {
+app.get('/movies/genre/:Name', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ 'Genre.Name': req.params.Name })
     .then((movie) => {
       res.json(movie);
@@ -55,7 +55,7 @@ app.get('/movies/genre/:Name', async (req, res) => {
     });
 });
 
-app.get('/movies/director/:Name', async (req, res) => {
+app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ 'Director.Name': req.params.Name })
     .then((movie) => {
       res.json(movie);
@@ -67,7 +67,7 @@ app.get('/movies/director/:Name', async (req, res) => {
 });
 
 //Add a user CREATE
-app.post('/users', async (req, res) => {
+app.post('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -95,7 +95,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Get all users READ
-app.get('/users', async (req, res) => {
+app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -107,7 +107,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Get a user by username READ
-app.get('/users/:Username', async (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
@@ -119,7 +119,7 @@ app.get('/users/:Username', async (req, res) => {
 });
 
 // Update a user's info, by username
-app.put('/users/:Username', async (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
@@ -142,7 +142,7 @@ app.put('/users/:Username', async (req, res) => {
 });
 
 // Add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:MovieID', async (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
@@ -160,7 +160,7 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
 });
 
 // Remove a movie from a user's list of favorites
-app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
@@ -178,7 +178,7 @@ app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
 });
 
 // Delete a user by username
-app.delete('/users/:Username', async (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndDelete({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
@@ -206,6 +206,11 @@ app.use(
     extended: true,
   })
 );
+
+let auth = require('./auth.js')(app);
+
+const passport = require('passport');
+require('./passport.js');
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
