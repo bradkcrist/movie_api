@@ -7,6 +7,17 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+let auth = require('./auth.js')(app);
+
+const passport = require('passport');
+require('./passport.js');
+
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
@@ -67,7 +78,7 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false 
 });
 
 //Add a user CREATE
-app.post('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.post('/users', async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -120,6 +131,9 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
 
 // Update a user's info, by username
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if (req.user.Username !== req.params.Username) {
+    return res.status(400).send('Permission denied');
+  }
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
@@ -136,7 +150,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
       res.json(updatedUser);
     })
     .catch((err) => {
-      console.error(err);
+      console.log(err);
       res.status(500).send('Error: ' + err);
     });
 });
@@ -200,17 +214,6 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {
 app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(express.static('public'));
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
-let auth = require('./auth.js')(app);
-
-const passport = require('passport');
-require('./passport.js');
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
