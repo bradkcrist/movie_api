@@ -259,3 +259,4 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on Port ' + port);
 });
+mongoimport --uri mongodb+srv://bradkcrist08:FreyaKora1@mymoviesdb.ce2wweu.mongodb.net/MyFlixDB --collection movies --type json --file ../exported_collections/movies
