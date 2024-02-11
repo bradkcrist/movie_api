@@ -42,7 +42,9 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/mymovie', { useNewUrlParser: true, useUnifiedTopology: true });
+//LOCAl MongoDB URI mongodb://localhost:27017/mymovie
+//ONLINE MongoDB URI
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.get('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
   res.send('Welcome to myMovies');
@@ -259,4 +261,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on Port ' + port);
 });
-mongoimport --uri mongodb+srv://bradkcrist08:FreyaKora1@mymoviesdb.ce2wweu.mongodb.net/MyFlixDB --collection movies --type json --file ../exported_collections/movies
